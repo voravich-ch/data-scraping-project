@@ -11,7 +11,7 @@ def connect_to_database():
     MONGODB_URI = 'mongodb://heroku_0bjqvfwj:36ccu7pktksfa9i0efttheusuo@ds263707.mlab.com:63707/heroku_0bjqvfwj'
     client = pymongo.MongoClient(MONGODB_URI, retryWrites = False)
     db = client['heroku_0bjqvfwj']
-    collection_name = 'news_data2'
+    collection_name = 'news_data'
     if collection_name not in db.list_collection_names():
         db.create_collection(collection_name)
     collection = db[collection_name]
