@@ -18,21 +18,19 @@ def connect_to_database():
     return collection
 
 
-def scrape_data():
+def scrape_and_insert_data(collection):
     response = requests.get('https://www.thairath.co.th/news/royal')
     html_page = bs4.BeautifulSoup(response.content, 'html.parser')
     data = html_page.find(id = '__NEXT_DATA__')
     json_file = json.loads(str(data)[51:-9])
     target_news = json_file['props']['initialState']['common']['data']['items']['lastestNews']
-    
-    document = []
 
     for news in target_news:
         content = bs4.BeautifulSoup(requests.get(news['canonical']).content, 'html.parser').select('div.css-n5piny.evs3ejl1 p')
         desc = ''
         for p in content:
             desc = desc + p.text + '\n'
-        dict = {
+        document = {
         'title': news['title'],
         'publish_date': datetime.datetime.strptime(news['publishTime'][0:10] + ' ' + news['publishTime'][11:19], '%Y-%m-%d %H:%M:%S'),
         'desc': desc,
@@ -41,21 +39,12 @@ def scrape_data():
         'news_url': news['canonical'],
         'category': news['topic'],
                 }
-        document.append(dict)
-
+        collection.insert_one(document)
     return document
-
-
-def insert_to_database(collection, document):
-    collection.insert_one(document)
-    print(document)
-    print('Document inserted!')
-
 
 def main():
     collection = connect_to_database()
-    document = scrape_data()
-    insert_to_database(collection, document)
+    scrape_and_insert_data(collection)
 
 
 if __name__ == "__main__":
