@@ -41,7 +41,7 @@ def scrape_and_insert_data(collection, titles):
             desc = desc + p.text + '\n'
         document = {
         'title': news['title'],
-        'publish_date': datetime.datetime.strptime(news['publishTime'][0:10] + ' ' + news['publishTime'][11:19], '%Y-%m-%d %H:%M:%S'),
+        'publish_date': datetime.datetime.strptime(news['publishTime'][0:10], '%Y-%m-%d'),
         'desc': desc,
         'tags': news['tags'],
         'cover_img': news['image'],
