@@ -7,8 +7,8 @@ import datetime
 
 def connect_to_database():
     # ใช้ os.environ แทน ไม่ควร hardcode อะไรที่เป็น credential
-    MONGODB_URI = os.environ['MONGODB_URI']
-    # MONGODB_URI = 'mongodb://heroku_0bjqvfwj:36ccu7pktksfa9i0efttheusuo@ds263707.mlab.com:63707/heroku_0bjqvfwj'
+    # MONGODB_URI = os.environ['MONGODB_URI']
+    MONGODB_URI = 'mongodb://heroku_0bjqvfwj:36ccu7pktksfa9i0efttheusuo@ds263707.mlab.com:63707/heroku_0bjqvfwj'
     client = pymongo.MongoClient(MONGODB_URI, retryWrites = False)
     db = client['heroku_0bjqvfwj']
     collection_name = 'news_data'
@@ -16,11 +16,6 @@ def connect_to_database():
         db.create_collection(collection_name)
     collection = db[collection_name]
     return collection
-
-def insert_to_database(collection, document):
-    collection.insert_one(document)
-    print(document)
-    print('Document inserted!')
 
 
 def scrape_and_insert_data(collection):
@@ -44,8 +39,10 @@ def scrape_and_insert_data(collection):
         'news_url': news['canonical'],
         'category': news['topic'],
                 }
-        insert_to_database(collection, document)
-
+        collection.insert_one(document)
+        print(document)
+        print('Document inserted!')
+        print(document['title'])
     return document
 
 def main():
