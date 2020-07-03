@@ -18,7 +18,16 @@ def connect_to_database():
     return collection
 
 
-def scrape_and_insert_data(collection):
+def get_data(collection):
+    cursor = collection.find({}, projection = {"_id": 0})
+    documents = [document for document in cursor]
+    titles = []
+    for document in documents:
+        titles.append(document['title'])
+    return titles
+
+
+def scrape_and_insert_data(collection, titles):
     response = requests.get('https://www.thairath.co.th/news/royal')
     html_page = bs4.BeautifulSoup(response.content, 'html.parser')
     data = html_page.find(id = '__NEXT_DATA__')
@@ -39,13 +48,16 @@ def scrape_and_insert_data(collection):
         'news_url': news['canonical'],
         'category': news['topic'],
                 }
-        collection.insert_one(document)
-    return document
+        if any(document['title'] in a for a in titles):
+            pass
+        else: 
+            collection.insert_one(document)
+            titles.append(document['title'])
 
 def main():
     collection = connect_to_database()
-    scrape_and_insert_data(collection)
-
+    titles = get_data(collection)
+    scrape_and_insert_data(collection, titles)
 
 if __name__ == "__main__":
     main()
