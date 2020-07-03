@@ -7,8 +7,7 @@ import datetime
 
 def connect_to_database():
     # ใช้ os.environ แทน ไม่ควร hardcode อะไรที่เป็น credential
-    # MONGODB_URI = os.environ['MONGODB_URI']
-    MONGODB_URI = 'mongodb://heroku_0bjqvfwj:36ccu7pktksfa9i0efttheusuo@ds263707.mlab.com:63707/heroku_0bjqvfwj'
+    MONGODB_URI = os.environ['MONGODB_URI']
     client = pymongo.MongoClient(MONGODB_URI, retryWrites = False)
     db = client['heroku_0bjqvfwj']
     collection_name = 'news_data'
