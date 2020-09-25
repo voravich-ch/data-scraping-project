@@ -19,6 +19,16 @@ The main objective of this project is to deploy a web API to serve news data wit
 ```
 
 ## File Description
-*   `app.py` -> Python script for data scraping. It scrapes data from a [news website](https://www.thairath.co.th/news/royal) and stores parameters including: \
-  ** title, public_date, 
--   `api.py` -> Table containing random sample for testing (Not used: data cleaning is needed)
+- `app.py` -> Python script for data scraping. It scrapes data from a [news website](https://www.thairath.co.th/news/royal) and stores parameters as a dictionary including: 
+  - **title**: title
+  - **public_date**: date of publication
+  - **desc**: content
+  - **tags**: tags
+  - **cover_img**:  cover image
+  - **news_url**: URL
+  - **category**:  category
+  
+-   `api.py` -> Python script to create an api to request news data from the database to display on the server. There are three arguments used for filtering including:
+  - **date**: date parameter accepts string format `YYYY:MM:DD`
+  - **tag**: tag parameter accepts string format
+  - **limit**: limit parameter accepts integer less than 20. The default will show 20 results when the parameter is not determined.
