@@ -5,15 +5,20 @@ The main objective of this project is to deploy a web API to serve news data wit
 
 ## **Directory Structure**
 
-
 ```
         data_scraping_project
         ├── README.md
-        ├── api_data_request
-        │   ├── api.py
-        │   ├── Procfile
+        ├── news_scraping
+        │   ├── app.py
         │   └── requirements.txt
-        └── news_scraping
-            ├── app.py
-            └── requirements.txt
+        └── api_data_request
+           ├── api.py
+           ├── Procfile
+           └── requirements.txt
+
 ```
+
+## File Description
+-   `app.py` -> Python script for data scraping. It scrapes data from a [news website](https://www.thairath.co.th/news/royal) and stores parameters including: \
+        title, public_date, 
+-   `api.py` -> Table containing random sample for testing (Not used: data cleaning is needed)
