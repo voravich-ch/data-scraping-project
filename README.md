@@ -31,4 +31,4 @@ The main objective of this project is to deploy a web API to serve news data wit
 - `api.py` -> Python script to create an api to request news data from the database to display on the server. There are three arguments used for filtering including: 
   - **date**: date parameter accepts string format `YYYY:MM:DD`
   - **tag**: tag parameter accepts string format
-  - **limit**: limit parameter accepts integer less than 20. The default will show 20 results when the parameter is not determined.
+  - **limit**: limit parameter accepts integer less than 20. The default will show 20 results when the parameter is not determined
