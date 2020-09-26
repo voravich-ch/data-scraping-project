@@ -19,7 +19,7 @@ The main objective of this project is to deploy a web API to serve news data wit
 ```
 
 ## File Description
-- `app.py` -> Python script for data scraping. It scrapes data from a [news website](https://www.thairath.co.th/news/royal) and stores parameters as a dictionary including: 
+- `app.py` -> Python script for data scraping. It scrapes data from a [news website](https://www.thairath.co.th/news/royal) and stores parameters as a dictionary in MongoDB database which includes: 
   - **title**: title
   - **public_date**: date of publication
   - **desc**: content
