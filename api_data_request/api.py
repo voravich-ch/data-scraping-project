@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from flask import Flask, jsonify, request
 import json
 import datetime
@@ -44,7 +46,7 @@ def serve_data():
         query = DF1
     if date is not None and tag is not None:
         query = pd.merge(DF1, DF2, on = ['title', 'publish_date', 'desc', 'cover_img', 'news_url', 'category'], how = 'inner')
-        query.drop(columns = 'tags_y', inplace =True)
+        query.drop(columns = 'tags_y', inplace = True)
         query.rename(columns = {'tags_x': 'tags'}, inplace = True)
     if date is None and tag is None:
         query = df
